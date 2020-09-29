@@ -1,10 +1,12 @@
 import {createStore} from 'vuex'
-import user from './modules/user'
-import navbar from './modules/navbar'
+import todos from './modules/todos'
+import topics from './modules/topics'
+import posts from './modules/posts'
 
 export default createStore({
     modules: {
-        user,
-        navbar
+        posts,
+        topics,
+        todos
     },
 })

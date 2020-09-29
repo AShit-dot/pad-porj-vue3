@@ -13,10 +13,10 @@ export default {
         const store = useStore()
 
         onMounted(async () => {
-            await store.dispatch('setUsers')
+            await store.dispatch('setTodos')
         })
 
-        const users = computed(() => store.getters.getUsers)
+        const users = computed(() => store.getters.getTodos)
         console.log(users)
 
         return {

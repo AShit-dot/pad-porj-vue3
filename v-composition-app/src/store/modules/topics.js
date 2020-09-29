@@ -1,8 +1,8 @@
 export default {
     state: {
-        todo: [
-            'Goals in procent',
-            'Tasks'
+        topics: [
+            {title: 'Todos', link: '/todos'},
+            {title: 'Posts', link: '/posts'}   
         ]
     },
     getters: {

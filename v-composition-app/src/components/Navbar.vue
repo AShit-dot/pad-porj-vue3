@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar">
         <ul class="navbar-wrapper">
-            <li class="navbar-item" v-for="topic in topics" :key="topic">{{topic}}</li>
+            <router-link tag="li" class="navbar-item" v-for="topic in topics" :key="topic.title" :to="topic.link">{{topic.title}}</router-link>
         </ul>
     </nav>    
 </template>

@@ -3,19 +3,19 @@ export default {
         todos: []
     },
     mutations: {
-        SET_TODOS(state, todos) {
+        SET_POSTS(state, todos) {
             state.todos = todos
         }
     },
     actions: {
-        async setUsers({commit}) {
-            const res = await fetch('https://jsonplaceholder.typicode.com/todos')
+        async setPosts({commit}) {
+            const res = await fetch('https://jsonplaceholder.typicode.com/posts')
             const resJson = await res.json()
-            commit('SET_TODOS', resJson)
+            commit('SET_POSTS', resJson)
         } 
     },
     getters: {
-        getUsers(state) {
+        getPosts(state) {
             return state.todos
         }
     }

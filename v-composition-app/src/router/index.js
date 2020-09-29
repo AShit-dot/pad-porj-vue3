@@ -9,10 +9,16 @@ const routes = [
         component: () => import('@/views/Home.vue')
     },
     {
-        path: '/todo',
+        path: '/todos',
         name: 'Todo', 
         meta: {layout: 'main'},
         component: () => import('@/views/Todo.vue')
+    },
+    {
+        path: '/posts',
+        name: 'Posts', 
+        meta: {layout: 'main'},
+        component: () => import('@/views/Posts.vue')
     }
 ]
 
