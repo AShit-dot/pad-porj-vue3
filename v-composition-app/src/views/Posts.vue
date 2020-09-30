@@ -1,11 +1,14 @@
 <template>
-    <ul>
-        <li v-for="post in posts" :key="post.id">
-            <h2>user id: {{post.userId}}</h2>
-            <h3>{{post.title}}</h3>
-            <p>{{post.body}}</p>
-        </li>
-    </ul>
+    <div class="posts-field">
+        <ul class="posts">
+            <title>Posts</title>
+            <li class="post" v-for="post in posts" :key="post.id">
+                <router-link tag="h3" class="post-title" :to="{ name: 'Post', params: { postId: post.id }}">{{post.title}}</router-link>
+                <!-- there construction needs to filter -->
+                <p class="post-descr">{{post.body}}</p> 
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
@@ -21,10 +24,55 @@ export default {
         })
 
         const posts = computed(() => store.getters.getPosts)
-
+        console.log(posts)
         return {
             posts
         }
     }
 }
 </script>
+
+<style lang="scss">
+    title {
+        margin-top: 20px;
+        display: block;
+        font-size: 40px;
+        font-weight: 100;
+    }
+    .posts {
+        background-color: rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        &-field {
+            
+            padding: 0 5%;
+            
+        }
+    }
+    .post {
+        width: 90%;
+        background-color: #fff;
+        list-style-type: none;
+        margin-top: 70px;
+        padding: 10px;
+        text-align: start;
+        border: 3px solid #e8e9eb;
+        border-radius: 4px;
+        &-title {
+            font-size: 35px;
+            font-weight: 100;
+            text-decoration: none;
+            color: #000;
+            &:hover {
+                 text-decoration: underline;
+            }
+        } 
+        &-descr  {
+            margin-top: 10px;
+            font-weight: 100;
+            font-size: 20px;
+        }
+    }
+</style>
