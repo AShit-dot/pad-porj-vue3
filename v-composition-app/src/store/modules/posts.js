@@ -1,10 +1,14 @@
 export default {
     state: {
-        todos: []
+        posts: [],
+        curPost: null
     },
     mutations: {
-        SET_POSTS(state, todos) {
-            state.todos = todos
+        SET_POSTS(state, posts) {
+            state.posts = posts
+        },
+        setCurPost(state, postId) {
+            state.curPost = state.posts.filter(post => post.id === postId)
         }
     },
     actions: {
@@ -16,7 +20,10 @@ export default {
     },
     getters: {
         getPosts(state) {
-            return state.todos
+            return state.posts
+        },
+        getCurPost (state) {
+            return state.curPost
         }
     }
 }
