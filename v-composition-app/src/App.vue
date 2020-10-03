@@ -34,6 +34,16 @@ export default {
   box-sizing: border-box;
 } 
 
+title {
+  display: block;
+}
+
+p {
+  display: block;
+}
+
+
+
 ::-webkit-scrollbar {
   width: 15px;
 }

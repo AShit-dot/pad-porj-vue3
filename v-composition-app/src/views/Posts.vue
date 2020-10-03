@@ -1,11 +1,11 @@
 <template>
     <div class="posts-field">
         <ul class="posts">
-            <title>Posts</title>
-            <li class="post" v-for="post in posts" :key="post.id">
-                <router-link tag="h3" class="post-title" :to="{ name: 'Post', params: { postId: post.id }}">{{post.title}}</router-link>
+            <title class="posts-header">Posts</title>
+            <li class="posts" v-for="post in posts" :key="post.id">
+                <router-link tag="h3" class="posts-title" :to="{ name: 'Post', params: { postId: post.id }}">{{post.title}}</router-link>
                 <!-- there construction needs to filter -->
-                <p class="post-descr">{{post.body}}</p> 
+                <p class="posts-descr">{{post.body}}</p> 
             </li>
         </ul>
     </div>
@@ -18,13 +18,20 @@ export default {
     setup() {
         
         const store = useStore()
+        let isLoaded = store.getters.getInfoAboutPosts
 
-        onMounted(async () => {
-            await store.dispatch('setPosts')
-        })
+        if(!isLoaded) {
+            console.log(isLoaded)
+            isLoaded = !isLoaded
+            onMounted(async () => {
+                await store.dispatch('setPosts')
+                store.commit('SET_ISLOADED', {isLoaded})
+            })
+        }
+        
 
         const posts = computed(() => store.getters.getPosts)
-        console.log(posts)
+        
         return {
             posts
         }
@@ -33,12 +40,6 @@ export default {
 </script>
 
 <style lang="scss">
-    title {
-        margin-top: 20px;
-        display: block;
-        font-size: 40px;
-        font-weight: 100;
-    }
     .posts {
         background-color: rgba(0,0,0,0.05);
         display: flex;
@@ -46,18 +47,15 @@ export default {
             justify-content: center;
             align-items: center;
         &-field {
-            
             padding: 0 5%;
-            
         }
     }
-    .post {
+    .posts {
         width: 90%;
         background-color: #fff;
         list-style-type: none;
         margin-top: 70px;
         padding: 10px;
-        text-align: start;
         border: 3px solid #e8e9eb;
         border-radius: 4px;
         &-title {
@@ -68,11 +66,17 @@ export default {
             &:hover {
                  text-decoration: underline;
             }
-        } 
-        &-descr  {
+        }
+        &-header {
+            margin-top: 20px;
+            display: block;
+            font-size: 40px;
+            font-weight: 100;
+        }
+        &-descr {
             margin-top: 10px;
             font-weight: 100;
             font-size: 20px;
-        }
+        }   
     }
 </style>

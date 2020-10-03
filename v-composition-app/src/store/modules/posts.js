@@ -1,14 +1,21 @@
 export default {
     state: {
         posts: [],
-        curPost: null
+        curPost: null,
+        isLoaded: false
     },
     mutations: {
         SET_POSTS(state, posts) {
             state.posts = posts
         },
-        setCurPost(state, postId) {
-            state.curPost = state.posts.filter(post => post.id === postId)
+        SET_CUR_POST (state, {postId}) {
+            state.curPost = state.posts.filter(post => post.id.toString() === postId)[0]
+        },
+        EDIT_CUR_POST(state, {postId, title, body}) {
+            state.posts[postId] = {title, body}
+        },
+        SET_ISLOADED(state, {isLoaded}) {
+            state.isLoaded = isLoaded
         }
     },
     actions: {
@@ -22,8 +29,11 @@ export default {
         getPosts(state) {
             return state.posts
         },
-        getCurPost (state) {
+        getPost(state) {
             return state.curPost
+        },
+        getInfoAboutPosts(state) {
+            return state.isLoaded
         }
     }
 }
